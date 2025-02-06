@@ -1,0 +1,64 @@
+#!/bin/bash
+
+
+#Colours
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+
+function ctrl_c(){
+
+	echo -e "\n${yellowColour}[*]${endColour}${grayColour} Exiting...${endColour}"; sleep 1
+	rm $tmp_file 2>/dev/null
+	tput cnorm; exit 1
+}
+
+echo -e "\n${yellowColour}[+] ${endColour}${blueColour}Introduce la${endColour} ${purpleColour}ip${endColour} ${blueColour}de la maquina a escanear: ${endColour}\n"
+read ip
+
+while ! ping -c1 $ip &>/dev/null 
+  do echo -e "\n${yellowColour}[+] ${endColour}${redColour}La ip introducida no esta disponible o no existe${endColour}"
+  exit 0
+done
+
+# Escaneo de puertos abiertos con Stealth Scan
+nmap -p- --open --min-rate 5000 -sS -n -Pn $ip -oG allPorts &>/dev/null
+PID=$!
+
+# Comprobacion de ejecucion con sudo
+if [ $? -eq 1 ]; then
+  echo -e "\n${yellowColour}[+] ${endColour}${redColour}Tienes que ejecutarlo con sudo${endColour}"
+  exit 1
+fi
+
+# Barra progreso del escaneo de puertos
+echo -en "\n${yellowColour}[+] ${endColour}${blueColour}Escaneando puertos: ${endColour}"
+while kill -0 $PID 2> /dev/null; do
+    echo -en "${greenColour}#${endColour}"
+    sleep 1
+done
+echo -e "${purpleColour} ¡Hecho!${endColour}\n"
+
+# Extraccion de puertos del archivo allPorts
+puertos=$(grep -oP '(?<=Ports: ).*' allPorts | awk -F'[ /]' '{for(i=1;i<=NF;i++) if ($i+0 == $i) ports = ports ? ports "," $i : $i} END {print ports}')
+
+# Escaneo de puertos especificos
+nmap -p $puertos -sCV $ip -oN target &>/dev/null &
+
+PID=$!
+
+# Barra progreso del escaneo de puertos especificos
+echo -en "${yellowColour}[+] ${endColour}${blueColour}Escaneando versiones de los puertos: ${endColour}"
+while kill -0 $PID 2> /dev/null; do
+    echo -en "${greenColour}#${endColour}"
+    sleep 1
+done
+echo -e "${purpleColour} ¡Hecho!${endColour}\n"
+
+tail -n +4 target | head -n -2 | batcat -l java
+
