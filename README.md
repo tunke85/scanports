@@ -31,4 +31,4 @@
   ```
 
 <p>Now the program will ask you to enter the IP you want to scan</p>
-![Grabación-2025-02-07-111108](https://github.com/user-attachments/assets/06a4deaf-68eb-4e40-8901-d8fbeb64e62f)
+![Inicio Script](https://github.com/user-attachments/assets/06a4deaf-68eb-4e40-8901-d8fbeb64e62f)
