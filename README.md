@@ -25,11 +25,16 @@
   ```bash
   scanports
   ```
+<p>or</p>
 
   ```bash
-  ./scanports
+  cd scanports && ./scanports
   ```
 
-<p>Now the program will ask you to enter the IP you want to scan</p>
+<p>Now the program will ask you to enter the IP you want to scan. It is important to execute the script with sudo.</p>
 
-![Inicio Script](https://github.com/user-attachments/assets/06a4deaf-68eb-4e40-8901-d8fbeb64e62f)
+![Inicio Script](https://github.com/user-attachments/assets/f520a097-77ef-49b0-a60f-1c380b324aa2)
+
+<p>Then the program will start scanning the ports and display them on the screen with batcat. It will show the versions of the services that are running on those ports.</p>
+
+![Vídeo sin título](https://github.com/user-attachments/assets/cf454162-70a8-41be-a63b-038a91c1cf36)
