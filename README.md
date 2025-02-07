@@ -16,7 +16,21 @@
   cd scanports && cp scanports /usr/bin/.
   ```
 
-<h3>How to use</h3>
+<h3>Dependencies: </h3>
+
+<p>To execute the program, you need some dependecies: </p>
+<ul>
+   <li>Nmap</li>
+   <li>Batcat</li>
+</ul>
+
+<p>To install:</p>
+
+  ```bash
+  sudo apt istall nmap batcat
+  ```
+
+<h3>How to use: </h3>
 
 <p>Call the script like a normal comand or execute the script in the directory</p>
   
