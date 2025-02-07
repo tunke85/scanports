@@ -5,6 +5,15 @@
 <ul>
   <li><h2>USE</h2></li>
 </ul>
+<h3>Installation: </h3>
+
+<p>Firs of all, we clone the repository wherever we want</p>
 
    ```bash
-   git clone https://github.com/usuario/MiProyecto.git
+   git clone https://github.com/tunke85/scanports
+   ```
+<p>Then we may put the script somewhere in the $PATH like /usr/bin or /usr/local/bin</p>
+  ```bash
+  cd scanports && cp scanports /usr/bin/.
+  ```
+  
