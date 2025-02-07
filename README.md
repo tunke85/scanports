@@ -13,7 +13,22 @@
    git clone https://github.com/tunke85/scanports
    ```
 <p>Then we may put the script somewhere in the $PATH like /usr/bin or /usr/local/bin</p>
+
   ```bash
   cd scanports && cp scanports /usr/bin/.
   ```
+
+<h3>How to use</h3>
+
+<p>Call the script like a normal comand or execute the script in the directory</p>
   
+  ```bash
+  scanports
+  ```
+
+  ```bash
+  ./scanports
+  ```
+
+<p>Now the program will ask you to enter the IP you want to scan</p>
+![Grabación-2025-02-07-111108](https://github.com/user-attachments/assets/06a4deaf-68eb-4e40-8901-d8fbeb64e62f)
