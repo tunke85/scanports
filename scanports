@@ -11,19 +11,34 @@ purpleColour="\e[0;35m\033[1m"
 turquoiseColour="\e[0;36m\033[1m"
 grayColour="\e[0;37m\033[1m"
 
+# Banner
+banner="ScanPorts"
+figlet -f slant $banner
+
+tmp_file=$(mktemp)
+
 function ctrl_c(){
 
-	echo -e "\n${yellowColour}[*]${endColour}${grayColour} Exiting...${endColour}"; sleep 1
+	echo -e "\n${yellowColour}[*]${endColour}${redColour} Saliendo...${endColour}"
+    sleep 1
 	rm $tmp_file 2>/dev/null
-	tput cnorm; exit 1
+	tput cnorm
+    exit 1
 }
+
+# Capturar el ctrl_c
+trap ctrl_c INT
 
 echo -e "\n${yellowColour}[+] ${endColour}${blueColour}Introduce la${endColour} ${purpleColour}ip${endColour} ${blueColour}de la maquina a escanear: ${endColour}\n"
 read ip
 
+# Ocultar cursor
+tput civis
+
 while ! ping -c1 $ip &>/dev/null 
   do echo -e "\n${yellowColour}[+] ${endColour}${redColour}La ip introducida no esta disponible o no existe${endColour}"
-  exit 0
+  tput cnorm
+  exit 1
 done
 
 # Escaneo de puertos abiertos con Stealth Scan
@@ -31,8 +46,9 @@ nmap -p- --open --min-rate 5000 -sS -n -Pn $ip -oG allPorts &>/dev/null
 PID=$!
 
 # Comprobacion de ejecucion con sudo
-if [ $? -eq 1 ]; then
+if [ $EUID -ne 0 ]; then
   echo -e "\n${yellowColour}[+] ${endColour}${redColour}Tienes que ejecutarlo con sudo${endColour}"
+  tput cnorm
   exit 1
 fi
 
@@ -43,6 +59,8 @@ while kill -0 $PID 2> /dev/null; do
     sleep 1
 done
 echo -e "${purpleColour} ¡Hecho!${endColour}\n"
+
+wait $PID
 
 # Extraccion de puertos del archivo allPorts
 puertos=$(grep -oP '(?<=Ports: ).*' allPorts | awk -F'[ /]' '{for(i=1;i<=NF;i++) if ($i+0 == $i) ports = ports ? ports "," $i : $i} END {print ports}')
@@ -59,6 +77,8 @@ while kill -0 $PID 2> /dev/null; do
     sleep 1
 done
 echo -e "${purpleColour} ¡Hecho!${endColour}\n"
+
+tput cnorm
 
 tail -n +4 target | head -n -2 | batcat -l java
 
