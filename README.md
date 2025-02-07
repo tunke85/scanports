@@ -2,9 +2,7 @@
 
 <p>This port scanner is a tool that use nmap to scan the ports. This tool facilitates port scanning and beautifies the output using batcat for this.</p>
 
-<ul>
-  <li><h2>USE</h2></li>
-</ul>
+<h2>Use</h2>
 <h3>Installation: </h3>
 
 <p>Firs of all, we clone the repository wherever we want</p>
@@ -38,3 +36,6 @@
 <p>Then the program will start scanning the ports and display them on the screen with batcat. It will show the versions of the services that are running on those ports.</p>
 
 ![Vídeo sin título (3)](https://github.com/user-attachments/assets/6971f187-5c26-4b0b-b5f9-aee561bc6ed0)
+
+<h3>Important</h3>
+<p>The program create two files (allPorts, target) that can be use to read again instead of execute de program again</p>
