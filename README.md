@@ -33,9 +33,8 @@
 
 <p>Now the program will ask you to enter the IP you want to scan. It is important to execute the script with sudo.</p>
 
-![Vídeo sin título](https://github.com/user-attachments/assets/b50ba3e8-c692-4a9c-b2d2-bf1edab6b4ce)
+![Inicio del programa](https://github.com/user-attachments/assets/89644d16-c2f2-4d6f-942a-594421fb7534)
 
 <p>Then the program will start scanning the ports and display them on the screen with batcat. It will show the versions of the services that are running on those ports.</p>
 
-![Vídeo sin título](https://github.com/user-attachments/assets/3cf417e6-f8ec-4be3-bb48-6ecb35fc2a85)
-
+![Vídeo sin título (3)](https://github.com/user-attachments/assets/6971f187-5c26-4b0b-b5f9-aee561bc6ed0)
