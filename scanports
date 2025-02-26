@@ -42,7 +42,7 @@ while ! ping -c1 $ip &>/dev/null
 done
 
 # Escaneo de puertos abiertos con Stealth Scan
-nmap -p- --open --min-rate 5000 -sS -n -Pn $ip -oG allPorts &>/dev/null
+nmap -p- --open --min-rate 5000 -sS -n -Pn $ip -oG allPorts &>/dev/null &
 PID=$!
 
 # Comprobacion de ejecucion con sudo
